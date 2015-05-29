@@ -1,0 +1,6 @@
+// Add page to array for later processings
+(function(){
+  window.PAGES = window.PAGES || {}
+  window.PAGES['<%= contents.id %>'] = <%= file.contents %>;
+}());
+

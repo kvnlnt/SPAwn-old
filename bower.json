@@ -1,0 +1,13 @@
+{
+  "name": "website",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.8.1",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.4",
+    "backbone.controller": "*",
+    "augment.js": "~1.0.0",
+    "normalize.css": "~3.0.3"
+  },
+  "devDependencies": {}
+}
