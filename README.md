@@ -19,4 +19,6 @@ Gulp has three main targets.
 ## deploy
 - Compiles all required files
 - Copies all required files to dist folder
+
+## deploy:serve
 - Opens up the production version of the app in a browser

@@ -6,21 +6,8 @@
   describe('Health Check', function () {
     describe('Sanity', function () {
 
-      it('App namespacing is stable', function () {
-
-        var keys = [
-          'Router',
-          'Config',
-          'Models',
-          'Pages',
-          'Collections',
-          'Views',
-          'Controllers',
-          'Index',
-          'PubSub'
-        ];
-
-        assert(_.keys(App), keys);
+      it('Tests are hooked up correctly', function () {
+        assert(true, true);
       });
 
       it('app is a backbone application', function () {

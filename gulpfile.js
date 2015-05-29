@@ -114,7 +114,7 @@ gulp.task('bundle-vendor-scripts', function() {
 gulp.task('bundle-test-scripts', function() {
 
     return gulp.src(['./test/spec/**/*.js'])
-        .pipe(concat('test-bundle.js'))
+        .pipe(concat('tests.js'))
         .pipe(plumber())
         .pipe(gulp.dest('./test/scripts'));
 
@@ -180,20 +180,8 @@ gulp.task('develop', ['bundle'], function() {
 gulp.task('test', ['bundle-test-scripts'],
     function() {
 
-        // copy vendor scripts
-        gulp.src(['./app/scripts/scripts-vendor-bundle.js'])
-            .pipe(gulp.dest('./test/scripts'));
-
-        // copy scripts
-        gulp.src(['./app/scripts/scripts-bundle.js'])
-            .pipe(gulp.dest('./test/scripts'));
-
-        // copy template scripts
-        gulp.src(['./app/scripts/scripts-template-bundle.js'])
-            .pipe(gulp.dest('./test/scripts'));
-
-        // copy test
-        gulp.src(['./app/scripts/scripts-test-bundle.js'])
+        // copy bundles
+        gulp.src(['./app/scripts/bundles/*.js'])
             .pipe(gulp.dest('./test/scripts'));
 
         // watch for spec changes
@@ -222,24 +210,20 @@ gulp.task('deploy', ['bundle'], function() {
 
     // copy scripts
     gulp.src([
-        './app/scripts/app-bundle.js',
-        './app/scripts/template-bundle.js',
-        './app/scripts/vendor-bundle.js',
-        './app/scripts/page-bundle.js'
+        './app/scripts/bundles/*.js',
     ])
         .pipe(uglify())
-        .pipe(gulp.dest('./dist/scripts'));
+        .pipe(gulp.dest('./dist/scripts/bundles'));
 
     // copy styles
     gulp.src([
-        './app/styles/app-bundle.css',
-        './app/styles/vendor-bundle.css'
+        './app/styles/bundles/*.css',
     ])
         .pipe(minifyCss({
             compatibility: 'ie8',
             keepSpecialComments: 0
         }))
-        .pipe(gulp.dest('./dist/styles'));
+        .pipe(gulp.dest('./dist/styles/bundles'));
 
     // copy fonts
     gulp.src('./app/fonts/**/*')
