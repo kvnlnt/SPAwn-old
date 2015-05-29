@@ -178,10 +178,12 @@ App.Router = Backbone.Router.extend({
         // setup container first, this will cascade down in the controller
         this.container = $("#body");
 
-        // setup the current controller
-        this.controller = new App.Controllers.Main({
-            router: this
-        });
+        // create instances of all the controllers we want to use
+        this.controllers = {
+          main: new App.Controllers.Main({
+              router: this
+          })
+        };
 
         // XXX: initialize pollyfills
 
@@ -197,7 +199,7 @@ $(document).ready(function() {
 
     // Setup and Boot app
     window.app = new App.Router();
-    window.app.controller.view.render();
+    window.app.controllers.main.view.render();
 
     // Register App events
     App.PubSub.trigger(App.Events.ready);
