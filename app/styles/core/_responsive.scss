@@ -40,3 +40,13 @@ $desktop-width: 1280px;
         }
     }
 }
+
+@include mq(mobile) {
+    .row { width: 100%; display: block; }
+    .col { display: block; }
+}
+
+@include mq(tablet) {
+    .row { width: 100%; display: table; table-layout: fixed; }
+    .col { display: table-cell; }
+}

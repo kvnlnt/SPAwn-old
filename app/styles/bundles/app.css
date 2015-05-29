@@ -14,6 +14,21 @@ a {
   -webkit-box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, 0.45);
   box-shadow: 3px 3px 8px -1px rgba(0, 0, 0, 0.45); }
 
+@media (min-width : 0) {
+  .row {
+    width: 100%;
+    display: block; }
+  .col {
+    display: block; } }
+
+@media (min-width : 1024px) {
+  .row {
+    width: 100%;
+    display: table;
+    table-layout: fixed; }
+  .col {
+    display: table-cell; } }
+
 body {
   font-family: 'Bryant'; }
 

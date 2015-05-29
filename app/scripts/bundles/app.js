@@ -70,6 +70,40 @@ App.Views.Base = Backbone.View.extend({
 
 });
 
+App.Views.About = App.Views.Base.extend({
+
+    id: 'about',
+    template: JST['about.jst'],
+    events: {},
+
+    initialize: function() {
+
+       this.header = new App.Views.Header({
+            model: this.model
+        });
+
+    },
+
+    render: function() {
+
+        // populate template
+        this.$el.html(this.template());
+
+        // render and attach childviews
+        this.assign(this.header, '#header');
+
+        // add to container now, all done
+        app.container.html(this.el);
+
+        // call any setup scripts on child views
+        this.header.responsify();
+
+        return this;
+
+    }
+
+});
+
 App.Views.Dashboard = Backbone.View.extend({
 
     template: JST['dashboard.jst'],
@@ -145,13 +179,15 @@ App.Views.Main = App.Views.Base.extend({
 App.Controllers.Main = Backbone.Controller.extend({
 
     routes: {
-        "": "default"
+        "": "default",
+        "dashboard":"dashboard",
+        "about":"about"
     },
 
     // initializations
     initialize: function() {},
 
-    // default route
+    // default route, don't render...it's called automatically via boot
     default: function() {
 
         // this model holds helpful state related data
@@ -161,6 +197,29 @@ App.Controllers.Main = Backbone.Controller.extend({
         this.view = new App.Views.Main({
             model: this.model
         });
+
+    },
+
+    // dashboard route
+    dashboard: function() {
+
+        // this model holds helpful state related data
+        this.model = new App.Models.Main();
+
+        // set up the main view
+        this.view = new App.Views.Main({
+            model: this.model
+        });
+        this.view.render();
+
+    },
+
+    // about route
+    about: function() {
+
+        // set up the main view
+        this.view = new App.Views.About();
+        this.view.render();
 
     },
 
@@ -175,10 +234,11 @@ App.Router = Backbone.Router.extend({
 
     initialize: function() {
 
-        // setup container first, this will cascade down in the controller
+        // setup container first, this will become available at app.container
         this.container = $("#body");
 
         // create instances of all the controllers we want to use
+        // will be accessible at app.controllers
         this.controllers = {
           main: new App.Controllers.Main({
               router: this

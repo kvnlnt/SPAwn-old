@@ -40,7 +40,9 @@ gulp.task('bundle-app-styles', function() {
 // bundle vendor styles
 gulp.task('bundle-vendor-styles', function() {
 
-    return gulp.src(['./bower_components/normalize.css/normalize.css'])
+    return gulp.src([
+        './bower_components/normalize.css/normalize.css',
+        ])
         .pipe(sass())
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest('./app/styles/bundles'));
@@ -56,6 +58,7 @@ gulp.task('bundle-app-scripts', function() {
             './app/scripts/config/*.js',
             './app/scripts/models/*.js',
             './app/scripts/collections/*.js',
+            './app/scripts/views/base.js',
             './app/scripts/views/*.js',
             './app/scripts/controllers/*.js',
             './app/scripts/app.js'

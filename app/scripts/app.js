@@ -6,10 +6,11 @@ App.Router = Backbone.Router.extend({
 
     initialize: function() {
 
-        // setup container first, this will cascade down in the controller
+        // setup container first, this will become available at app.container
         this.container = $("#body");
 
         // create instances of all the controllers we want to use
+        // will be accessible at app.controllers
         this.controllers = {
           main: new App.Controllers.Main({
               router: this
